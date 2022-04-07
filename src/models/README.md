@@ -1,1 +1,1 @@
-Use this folder for models
+Use this folder for models/interfaces

@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { UserEmptyState } from "@/redux/constants/constants";
 
 const initialState = {
+    user: UserEmptyState,
     isUserAuthenticated: false,
 };
 
