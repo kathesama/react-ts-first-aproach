@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import persistStore from 'redux-persist/es/persistStore'
@@ -10,18 +11,22 @@ import store from './redux/store'
 
 import './index.scss'
 
-const persistor = persistStore(store)
+const persistor = persistStore(store);
+// const root = createRoot(document.getElementById('root')!);
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container as HTMLElement);
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <App />
+        <div className="container">
+          <App />
+        </div>
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+  </React.StrictMode>
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

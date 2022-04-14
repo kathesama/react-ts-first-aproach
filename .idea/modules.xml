@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/react-ts-first-aproach.iml" filepath="$PROJECT_DIR$/react-ts-first-aproach.iml" />
+      <module fileurl="file://$PROJECT_DIR$/react-typescript-prettier-eslint-with-husky.iml" filepath="$PROJECT_DIR$/react-typescript-prettier-eslint-with-husky.iml" />
     </modules>
   </component>
 </project>

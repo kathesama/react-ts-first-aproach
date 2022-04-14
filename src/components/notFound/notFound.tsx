@@ -6,9 +6,7 @@ Project: react-typescript
 import React, {FC} from 'react';
 import cssStyle from './notFound.module.scss';
 
-// @ts-ignore
-// @ts-ignore
-const NotFoundComponent: FC<any> = ({props}): any => (
+const NotFoundComponent: FC<any> = (): any => (
     <figure>
             <div className={cssStyle.sadMac} />
             <figcaption>

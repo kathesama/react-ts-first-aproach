@@ -18,7 +18,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'security'],
+  plugins: ['react', '@typescript-eslint', 'security', 'react-hooks'],
   rules: {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
@@ -45,6 +45,7 @@ module.exports = {
         unnamedComponents: "arrow-function",
       },
     ],
+    // "jsx-a11y/label-has-associated-control": "off",
   },
   settings: {
     'import/resolver': {
