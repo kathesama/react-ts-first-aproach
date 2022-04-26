@@ -5,7 +5,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --detectOpenHandles=true",
     "test:coverage": "react-scripts test --coverage",
     "eject": "craco eject",
     "lint": "eslint src",

@@ -24,7 +24,7 @@ const SignUpPage: FC<any> = (): any => {
   const [success, setSuccess] = useState(false);
   // eslint-disable-next-line react/jsx-no-useless-fragment
   const [error, setError] = useState(() => (<></>));
-  const [errorObj, setErrorObj] = useState({});
+  const [errorObj, setErrorObj] = useState(defaultUserInfo);
 
   useEffect(() => {
     const { password, confirmPassword = "" } = userInfo;
@@ -35,6 +35,7 @@ const SignUpPage: FC<any> = (): any => {
 
   const onChangeHandler = (event: FormEvent) => {
     const { id, value } = (event.target as HTMLInputElement);
+    setErrorObj({ ...errorObj, [id]: "" });
     setUserInfo({ ...userInfo, [id]: value });
   };
 
@@ -80,46 +81,49 @@ const SignUpPage: FC<any> = (): any => {
           <div className="card-body">
             <InputComponent
               id="username"
+              label="Username"
               type="text"
               placeholder="Username"
               name="username"
               onChange={onChangeHandler}
               className="form-control"
-              error={errorObj}
+              error={errorObj?.username}
             />
             <div className="mb-3">
-              <input
+              <InputComponent
                 id="email"
+                label="Email"
+                type="text"
                 placeholder="email"
+                name="email"
                 onChange={onChangeHandler}
                 className="form-control"
-                data-testid="email"
+                error={errorObj?.email}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-                <input
-                  id="password"
-                  type="password"
-                  onChange={onChangeHandler}
-                  className="form-control"
-                  data-testid="password"
-                />
-              </label>
+              <InputComponent
+                id="password"
+                label="Password"
+                type="password"
+                placeholder="password"
+                name="password"
+                onChange={onChangeHandler}
+                className="form-control"
+                error={errorObj?.password}
+              />
             </div>
             <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">
-                Confirm Password
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  onChange={onChangeHandler}
-                  className="form-control"
-                  data-testid="confirmPassword"
-                />
-              </label>
+              <InputComponent
+                id="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                placeholder="confirmPassword"
+                name="confirmPassword"
+                onChange={onChangeHandler}
+                className="form-control"
+                error={disabled && userInfo.password?.length > 0 ? 'Password mismatch' : ''}
+              />
             </div>
             <div className="text-center">
               <button

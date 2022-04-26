@@ -8,20 +8,23 @@ import cssStyle from "./input.module.scss";
 
 const InputComponent: FC<any> = (props: any): any => {
   const { id, placeholder, name, onChange, className, error, label, value = "default", type = "text" } = props;
+  const inputClass = `${className} ${error?.length > 0 ? ' is-invalid' : ''}`;
+  
   return (
-    <div className="text-center">
-      <div className="mb-3">
-        <input
-          id={id}
-          data-testid={id}
-          type={type}
-          placeholder={placeholder}
-          name={name}
-          onChange={onChange}
-          className={className}
-        />
-        <span>{error?.username}</span>
-      </div>
+    <div className="mb-3">
+      <label htmlFor={id} className="form-label">
+        {label}
+      </label>
+      <input
+        id={id}
+        data-testid={id}
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+        className={inputClass}
+      />
+      {error?.length > 0 && <span className="invalid-feedback">{error}</span>}
     </div>
   );
 };
