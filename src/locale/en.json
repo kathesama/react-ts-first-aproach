@@ -1,9 +1,10 @@
 {
   "signUp": "Sign Up",
   "username": "Username",
-  "email": "E-mail",
+  "email": "Email",
   "password": "Password",
-  "passwordRepeat": "Password Repeat",
+  "passwordRepeat": "Confirm Password",
+  "signUpBtn": "Sign Up",
   "passwordMismatchValidation": "Password mismatch",
   "users": "Users",
   "nextPage": "next >",

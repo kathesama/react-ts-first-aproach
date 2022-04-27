@@ -18,5 +18,5 @@
     "jsx": "react-jsx",
     "strictBindCallApply": false,
   },
-  "include": ["./src/**/*", "declarations.d.ts"],
+  "include": ["./src/**/*", "declarations.d.ts", "images.d.ts"],
 }

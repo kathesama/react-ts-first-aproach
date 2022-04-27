@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import persistStore from 'redux-persist/es/persistStore'
+// import i18n from 'i18next';
+import './locale/i18n'
 
 import App from './App'
 import store from './redux/store'
-// import reportWebVitals from './reportWebVitals'
 
 import './index.scss'
 

@@ -1,21 +1,34 @@
 import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { setupServer } from 'msw/node';
-import { DefaultRequestMultipartBody, rest } from "msw";
+import { DefaultRequestMultipartBody, rest } from 'msw';
 import ReactDOM from 'react-dom/client';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
+import i18n from '@/locale/i18n';
+import en from '@/locale/en.json';
+import es from '@/locale/es.json';
 import SignUpPage from "@/pages/signUpPage/signUpPage";
+import LanguageSelector from "@/components/languageSelector/languageSelector";
 import { getPostUserUrl } from "@/utilities/routes";
 
+const mock = new MockAdapter(axios);
+let acceptLanguageHeader: string | null ;
 let requestBody: string | number | boolean | Record<string, any> | DefaultRequestMultipartBody | null | undefined;
 let counter = 0;
 let container: any;
-// let acceptLanguageHeader;
+
+mock.onPost(getPostUserUrl()).reply((options: any) => {
+  acceptLanguageHeader = options?.headers?.get('Accept-Language');
+  return [200, {}];
+});
+
 const server = setupServer(
   rest.post(getPostUserUrl(), (req, res, ctx) => {
     requestBody = req.body;
     counter += 1;
-    // acceptLanguageHeader = req.headers.get('Accept-Language');
+    acceptLanguageHeader = req.headers.get('Accept-Language');
     return res(ctx.status(200));
   })
 );
@@ -58,7 +71,7 @@ describe("SignUp Page", () => {
       act(() => {
         ReactDOM.createRoot(container).render(<SignUpPage />);
       });
-      const input: any = screen.getByPlaceholderText("email");
+      const input: any = screen.getByPlaceholderText("Email");
       expect(input).toBeInTheDocument();
     });
     it("has password input", () => {
@@ -286,4 +299,114 @@ describe("SignUp Page", () => {
       expect(validationError).not.toBeInTheDocument();
     });
   });
+  describe("Internationalization", () => {
+    let spanishToggle: Element;
+    let englishToggle: Element;
+    let passwordInput: Element;
+    let inputPasswordConfirm: Element;
+    let button: any;
+
+    const elementChecker = async (langFile: any) => {
+      expect(await screen.getByRole("heading", { name: langFile.signUp })).toBeInTheDocument();
+      expect(await screen.getByRole("button", { name: langFile.signUpBtn })).toBeInTheDocument();
+      expect(await screen.getByLabelText(langFile.username)).toBeInTheDocument();
+      expect(await screen.getByLabelText(langFile.email)).toBeInTheDocument();
+      expect(await screen.getByLabelText(langFile.password)).toBeInTheDocument();
+      expect(await screen.getByLabelText(langFile.passwordRepeat)).toBeInTheDocument();
+    };
+
+    const setup = async () => {
+      act(() => {
+        ReactDOM.createRoot(container).render(
+          <>
+            <LanguageSelector />
+            <SignUpPage />
+          </>
+        );
+      });
+      spanishToggle = await screen.getByTitle('Spanish');
+      englishToggle = await screen.getByTitle('English');
+      passwordInput = await screen.findByText(en.password);
+      inputPasswordConfirm = await screen.findByText(en.passwordRepeat);
+      button = container.querySelector('button', { name: en.signUpBtn });
+    };
+
+    afterEach(() => {
+      act(() => {
+        i18n.changeLanguage('en');
+      });
+    });
+
+    it("initially displays English labels", async () => {
+      await setup();
+
+      await elementChecker(en);
+    });
+    it("initially displays Spanish labels after change language", async () => {
+      await setup();
+
+      act(() => {
+        userEvent.click(spanishToggle);
+      });
+      await elementChecker(es);
+    });
+    it("initially displays English labels after change back from Spanish", async () => {
+      await setup();
+
+      act(() => {
+        userEvent.click(spanishToggle);
+      });
+
+      act(() => {
+        userEvent.click(englishToggle);
+      });
+      await elementChecker(en);
+    });
+    it("display password mismatch error validation in spanish", async () => {
+      await setup();
+
+      act(() => {
+        userEvent.click(spanishToggle);
+      });
+
+      passwordInput = await screen.findByText(es.password);
+
+      act(() => {
+        userEvent.type(passwordInput, "Pa$s1!0rd");
+      });
+
+      const validationMessage = await screen.findByText(es.passwordMismatchValidation);
+
+      expect(validationMessage).toBeInTheDocument();
+    });
+    it ("Send accepted language header as en for outgoing request", async () => {
+      await setup();
+
+      act(() => {
+        userEvent.type(passwordInput, "Pa$s1!0rd");
+        userEvent.type(inputPasswordConfirm, "Pa$s1!0rd");
+        button = screen.getByRole("button", { name: en.signUpBtn });
+        userEvent.click(button);
+        expect(acceptLanguageHeader).toBe("en");
+      });
+    });
+    it ("Send accepted language header as es for outgoing request after selecting a Spanish", async () => {
+      await setup();
+
+      act(() => {
+        userEvent.type(passwordInput, "Pa$s1!0rd");
+        userEvent.type(inputPasswordConfirm, "Pa$s1!0rd");
+      })
+
+      act(() => {
+        userEvent.click(spanishToggle);
+      });
+
+      await act(() => {
+        userEvent.click(button);
+      });
+
+      await expect(acceptLanguageHeader).toBe("es");
+    })
+  })
 });

@@ -4,15 +4,19 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/home/home'
 import NotFound from './components/notFound/notFound'
 import SignUpPage from "@/pages/signUpPage/signUpPage";
+import LanguageSelector from "@/components/languageSelector/languageSelector";
 
 const App: FC<any> = (): any => (
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<SignUpPage />} />
-      <Route path='/test' element={<Home />} />
-      <Route path='*' element={<NotFound />} />
-    </Routes>
-  </BrowserRouter>
+  <>
+    <LanguageSelector />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<SignUpPage />} />
+        <Route path='/test' element={<Home />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  </>
 )
 
 export default App
