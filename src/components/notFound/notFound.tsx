@@ -7,7 +7,8 @@ import React, {FC} from 'react';
 import cssStyle from './notFound.module.scss';
 
 const NotFoundComponent: FC<any> = (): any => (
-    <figure>
+    <div data-testid="notFound-page">
+        <figure>
             <div className={cssStyle.sadMac} />
             <figcaption>
                 <span className={cssStyle.srText}>Error 404: Not Found</span>
@@ -32,6 +33,8 @@ const NotFoundComponent: FC<any> = (): any => (
                 <span className={cssStyle.d} />
             </figcaption>
         </figure>
+         <div className={cssStyle.hideText}>Not Found</div>
+    </div>
 );
 
 export default NotFoundComponent;

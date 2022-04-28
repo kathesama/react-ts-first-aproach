@@ -1,22 +1,24 @@
-import React, { FC } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import React, { FC } from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
-import Home from './components/home/home'
-import NotFound from './components/notFound/notFound'
-import SignUpPage from "@/pages/signUpPage/signUpPage";
-import LanguageSelector from "@/components/languageSelector/languageSelector";
+import NotFound from './components/notFound/notFound';
+import SignUpPage from '@/pages/signUpPage/signUpPage';
+// import LanguageSelector from '@/components/languageSelector/languageSelector';
+import HeaderPage from '@/pages/homePage/headerPage';
+import LoginPage from '@/pages/loginPage/loginPage';
+import UserPage from '@/pages/userPage/userPage';
 
 const App: FC<any> = (): any => (
-  <>
-    <LanguageSelector />
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<SignUpPage />} />
-        <Route path='/test' element={<Home />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  </>
-)
+  <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HeaderPage />}>
+            <Route path='signup' element={<SignUpPage />} />
+            <Route path='login' element={<LoginPage />} />
+            <Route path='user/:id' element={<UserPage />} />
+            <Route path='*' element={<NotFound />} />
+          </Route>
+        </Routes>
+     </BrowserRouter>
+);
 
-export default App
+export default App;

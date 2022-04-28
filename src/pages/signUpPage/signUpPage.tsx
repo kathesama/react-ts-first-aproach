@@ -3,22 +3,20 @@ Created by: Katherine Aguirre
 On: 7/4/2022 : 7/4/2022
 Project: react-ts-first-aproach
 */
-import React, { FC, FormEvent, useEffect, useState } from "react";
-import { useTranslation, withTranslation } from "react-i18next";
-import { UserInfo } from "@/models/UserInfo";
-import AxiosApi from "@/services/api/axiosApi";
-import { getPostUserUrl } from "@/utilities/routes";
-import InputComponent from "@/components/input/input";
-import LanguageSelector from "@/components/languageSelector/languageSelector";
-import useAxios from "@/hooks/useAxios/useAxios";
+import React, { FC, FormEvent, useEffect, useState } from 'react';
+import { useTranslation, withTranslation } from 'react-i18next';
+import { UserInfo } from '@/models/UserInfo';
+import { getPostUserUrl } from '@/utilities/routes';
+import InputComponent from '@/components/input/input';
+import useAxios from '@/hooks/useAxios/useAxios';
 
 // import cssStyle from "./signUpPage.module.scss";
 
 const defaultUserInfo: UserInfo = {
-  email: "",
-  username: "",
-  password: "",
-  confirmPassword: ""
+  email: '',
+  username: '',
+  password: '',
+  confirmPassword: ''
 };
 
 const SignUpPage: FC<any> = (props: any): any => {
@@ -30,7 +28,7 @@ const SignUpPage: FC<any> = (props: any): any => {
   const { error, success, loading : submitting, action } = useAxios();
 
   useEffect(() => {
-    const { password, confirmPassword = "" } = userInfo;
+    const { password, confirmPassword = '' } = userInfo;
     if (password?.length > 0 && confirmPassword?.length > 0) {
       setDisabled(password !== confirmPassword || submitting);
     }
@@ -38,7 +36,7 @@ const SignUpPage: FC<any> = (props: any): any => {
 
   const onChangeHandler = (event: FormEvent) => {
     const { id, value } = (event.target as HTMLInputElement);
-    setErrorForm({ ...errorForm, [id]: "" });
+    setErrorForm({ ...errorForm, [id]: '' });
     setUserInfo({ ...userInfo, [id]: value });
   };
 
@@ -103,18 +101,18 @@ const SignUpPage: FC<any> = (props: any): any => {
   }, [error]);
 
   return (
-    <div>
+    <div data-testid="signup-page">
       <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
         <form className="card mt-5" data-testid="form-signing-test">
           <div className="card-header">
-            <h1 className="text-center">{t("signUp")}</h1>
+            <h1 className="text-center">{t('signUp')}</h1>
           </div>
           <div className="card-body">
             <InputComponent
               id="username"
-              label={t("username")}
+              label={t('username')}
               type="text"
-              placeholder={t("username")}
+              placeholder={t('username')}
               name="username"
               onChange={onChangeHandler}
               className="form-control"
@@ -123,9 +121,9 @@ const SignUpPage: FC<any> = (props: any): any => {
             <div className="mb-3">
               <InputComponent
                 id="email"
-                label={t("email")}
+                label={t('email')}
                 type="text"
-                placeholder={t("email")}
+                placeholder={t('email')}
                 name="email"
                 onChange={onChangeHandler}
                 className="form-control"
@@ -135,9 +133,9 @@ const SignUpPage: FC<any> = (props: any): any => {
             <div className="mb-3">
               <InputComponent
                 id="password"
-                label={t("password")}
+                label={t('password')}
                 type="password"
-                placeholder={t("password")}
+                placeholder={t('password')}
                 name="password"
                 onChange={onChangeHandler}
                 className="form-control"
@@ -147,13 +145,13 @@ const SignUpPage: FC<any> = (props: any): any => {
             <div className="mb-3">
               <InputComponent
                 id="confirmPassword"
-                label={t("passwordRepeat")}
+                label={t('passwordRepeat')}
                 type="password"
-                placeholder={t("passwordRepeat")}
+                placeholder={t('passwordRepeat')}
                 name="confirmPassword"
                 onChange={onChangeHandler}
                 className="form-control"
-                error={disabled && userInfo.password?.length > 0 ? t("passwordMismatchValidation") : ''}
+                error={disabled && userInfo.password?.length > 0 ? t('passwordMismatchValidation') : ''}
               />
             </div>
             <div className="text-center">
@@ -165,8 +163,9 @@ const SignUpPage: FC<any> = (props: any): any => {
                 className="btn btn-primary mb-3"
                 data-testid="signUp"
               >
-                {submitting && <span data-testid="spinner-test" className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"/>}
-                {t("signUpBtn")}
+                {submitting
+                  && <span data-testid="spinner-test" className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"/>}
+                {t('signUpBtn')}
               </button>
             </div>
           </div>

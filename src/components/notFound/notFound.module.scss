@@ -97,4 +97,10 @@ figcaption span {
   }
 }
 
+.hideText {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 // CREDITS TO: https://codepen.io/jkantner/pen/aPLWJm

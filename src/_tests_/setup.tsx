@@ -2,8 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import LanguageSelector from '../components/LanguageSelector';
-// import createStore from '../state/store';
+
+/* import LanguageSelector from '../components/LanguageSelector';
+   import createStore from '../state/store'; */
 
 const RootWrapper = (children: any) => (
     <Router>

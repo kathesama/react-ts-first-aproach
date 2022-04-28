@@ -1,6 +1,6 @@
 import axiosInstance from '@/services/api/axiosApi';
-import { UserInfo } from "@/models/UserInfo";
-import { getPostUserUrl } from "@/utilities/routes";
+import { UserInfo } from '@/models/UserInfo';
+import { getPostUserUrl } from '@/utilities/routes';
 
 export const postUser = (user: UserInfo) => axiosInstance.post(getPostUserUrl(), user);
 

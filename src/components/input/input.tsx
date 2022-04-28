@@ -3,11 +3,11 @@ Created by: Katherine Aguirre
 On: 12/4/2022 : 12/4/2022
 Project: react-ts-first-aproach
 */
-import React, { FC } from "react";
-import cssStyle from "./input.module.scss";
+import React, { FC } from 'react';
+// import cssStyle from './input.module.scss';
 
 const InputComponent: FC<any> = (props: any): any => {
-  const { id, placeholder, name, onChange, className, error, label, value = "default", type = "text" } = props;
+  const { id, placeholder, name, onChange, className, error, label, type = 'text' } = props;
   const inputClass = `${className} ${error?.length > 0 ? ' is-invalid' : ''}`;
   
   return (
