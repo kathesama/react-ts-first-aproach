@@ -5,35 +5,44 @@ Project: react-ts-first-aproach
 */
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, Outlet } from 'react-router-dom';
-import LanguageSelector from '@/components/languageSelector/languageSelector';
+import { useNavigate, Outlet, Link } from 'react-router-dom';
 
-// import cssStyle from './headerPage.module.scss';
+// import LanguageSelector from '@/components/languageSelector/languageSelector';
+import LanguageSelector from '../../components/languageSelector/languageSelector';
+import logo from '../../assets/img/logo.svg';
+
+import cssStyle from './headerPage.module.scss';
 
 const HeaderPageComponent: FC<any> = (props: any): any => {
-  // const { history } = props;
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  // const [path, setPath] = useState<string>('/');
-
-  const onClickLink = (event: any): void => {
-    event.preventDefault();
-    // history.pushState({}, '', event.target.attributes.href.value);
-    navigate(event.target.attributes.href.value);
-    // setPath(event.target.attributes.href.value);
-  };
 
   return (
     <>
-      <div className="container">
-        <div data-testid="header-page" className="row">
-          <h1 className="col-sm">{t('headerPage')}</h1>
-          <a href="/" title="header" onClick={onClickLink}>{t('linkGoHome')}</a>
-          <a href="signup" title="signup" onClick={onClickLink}>{t('signUp')}</a>
-          <a href="login" title="login" onClick={onClickLink}>{t('logIn')}</a>
+      <nav className="navbar navbar-expand navbar-light bg-light shadow-small">
+        <div data-testid="header-page" className="collapse navbar-collapse">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to="/" title="header" className="nav-link navbar-brand">
+                <div>
+                  <img src={logo} alt="logo" className={cssStyle.img}/>
+                  {t('headerPage')}
+                </div>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="signup" title="signup" className="nav-link">{t('signUpBtn')}</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="login" title="login" className="nav-link">{t('logIn')}</Link>
+            </li>
+          </ul>
         </div>
-        <LanguageSelector />
-      </div>
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <LanguageSelector />
+          </li>
+        </ul>
+      </nav>
       <Outlet />
     </>
   );

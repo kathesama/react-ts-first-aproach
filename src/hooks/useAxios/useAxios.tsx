@@ -2,8 +2,8 @@
 Created by: kathe
 */
 import { useState, useCallback } from 'react';
-import axiosApi from '@/services/api/axiosApi';
-import { AxiosResponse } from '@/models/AxiosResponse';
+import { AxiosResponse } from '../../models/AxiosResponse';
+import axiosApi from '../../services/api/axiosApi';
 
 const axiosResponse : AxiosResponse = {
   config: {},

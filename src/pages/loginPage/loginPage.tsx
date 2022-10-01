@@ -4,7 +4,7 @@ On: 27/4/2022 : 27/4/2022
 Project: react-ts-first-aproach
 */
 import React, { FC } from 'react';
-// import cssStyle from './loginPage.module.scss';
+// import cssStyle from './invalidUrlPage.module.scss';
 
 const LoginPagePage: FC<any> = (props: any): any => (
   <div data-testid="login-page">

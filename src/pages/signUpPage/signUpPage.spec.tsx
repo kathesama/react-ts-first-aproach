@@ -6,12 +6,12 @@ import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import i18n from '@/locale/i18n';
-import en from '@/locale/en.json';
-import es from '@/locale/es.json';
-import SignUpPage from '@/pages/signUpPage/signUpPage';
-import LanguageSelector from '@/components/languageSelector/languageSelector';
-import { getPostUserUrl } from '@/utilities/routes';
+import i18n from '../../locale/i18n';
+import en from '../../locale/en.json';
+import es from '../../locale/es.json';
+import SignUpPage from '../../pages/signUpPage/signUpPage';
+import LanguageSelector from '../../components/languageSelector/languageSelector';
+import { getPostUserUrl } from '../../utilities/routes';
 
 const mock = new MockAdapter(axios);
 let acceptLanguageHeader: string | null ;

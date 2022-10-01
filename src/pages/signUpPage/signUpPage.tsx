@@ -5,10 +5,10 @@ Project: react-ts-first-aproach
 */
 import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useTranslation, withTranslation } from 'react-i18next';
-import { UserInfo } from '@/models/UserInfo';
-import { getPostUserUrl } from '@/utilities/routes';
-import InputComponent from '@/components/input/input';
-import useAxios from '@/hooks/useAxios/useAxios';
+import { UserInfo } from '../../models/UserInfo';
+import useAxios from '../../hooks/useAxios/useAxios';
+import { getPostUserUrl } from '../../utilities/routes';
+import InputComponent from '../../components/input/input';
 
 // import cssStyle from "./signUpPage.module.scss";
 

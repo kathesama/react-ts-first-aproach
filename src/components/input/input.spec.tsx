@@ -1,7 +1,7 @@
 import { act } from "@testing-library/react";
 import ReactDOM from "react-dom/client";
-import SignUpPage from "@/pages/signUpPage/signUpPage";
-import { render } from '@/_tests_/setup';
+// import SignUpPage from "@/pages/signUpPage/signUpPage";
+// import { render } from '@/_tests_/setup';
 import Input from "./input";
 
 let container: any;
